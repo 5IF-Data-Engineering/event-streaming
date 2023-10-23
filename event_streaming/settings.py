@@ -15,8 +15,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-KAFKA_HOST = 'localhost'
-KAFKA_PORT = '9092'
+KAFKA_HOST = os.environ.get('KAFKA_HOST', 'localhost')
+KAFKA_PORT = os.environ.get('KAFKA_PORT', '9092')
+
+MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
+MONGO_PORT = os.environ.get('MONGO_PORT', '27017')
+MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'root')
+MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'example')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -119,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Paris'
+TIME_ZONE = os.environ.get('TZ', 'Europe/Paris')
 
 USE_I18N = True
 
@@ -127,7 +133,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-PYTHONUNBUFFERED = True
+PYTHONUNBUFFERED = os.environ.get('PYTHONUNBUFFERED', '1')
 
 
 # Static files (CSS, JavaScript, Images)
