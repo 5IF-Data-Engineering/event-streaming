@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ingestion_weather.urls')),
+    path('', include('kafka_ingestion_weather.urls')),
 ]
