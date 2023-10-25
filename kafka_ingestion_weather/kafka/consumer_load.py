@@ -4,7 +4,7 @@ from event_streaming.settings import (
     KAFKA_PORT,
 )
 import json
-from ingestion_weather.pipeline.load import load_data
+from kafka_ingestion_weather.pipeline.load import load_data
 
 
 def consumer_load_data(load_topic_name: str, daily=None):

@@ -25,3 +25,4 @@ static/
 *.psql
 celery-*.pid
 pg_data*
+*.sqlite3

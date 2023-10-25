@@ -4,7 +4,7 @@ from event_streaming.settings import (
     KAFKA_PORT,
 )
 import json
-from ingestion_weather.pipeline.extract import extract_data
+from kafka_ingestion_weather.pipeline.extract import extract_data
 
 
 def producer_extract_data(transform_topic_name: str, lat: str, lon: str,
