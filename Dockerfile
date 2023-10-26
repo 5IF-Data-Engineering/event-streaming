@@ -1,6 +1,6 @@
-FROM python:3.9.13
+FROM python:3.8.14
 
-RUN mkdir -p /event_streaming
+RUN mkdir -p /app
 WORKDIR /app
 
 COPY . /app/
