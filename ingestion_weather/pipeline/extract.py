@@ -14,7 +14,7 @@ def extract_data(lat: str, lon: str, start_date: str, end_date: str, daily=None)
                       "snow_depth,surface_pressure,cloudcover,vapor_pressure_deficit,windspeed_10m," +
                       "soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_temperature_28_to_100cm," +
                       "soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,soil_moisture_28_to_100cm",
-            "timezone": "Europe/Paris"
+            "timezone": "America/Toronto"
         }
     else:
         params = {
@@ -26,7 +26,7 @@ def extract_data(lat: str, lon: str, start_date: str, end_date: str, daily=None)
                      "apparent_temperature_min,apparent_temperature_mean,sunrise,sunset,precipitation_sum,rain_sum,"
                      "snowfall_sum,precipitation_hours,windspeed_10m_max,shortwave_radiation_sum,"
                      "et0_fao_evapotranspiration",
-            "timezone": "Europe/Paris"
+            "timezone": "America/Toronto"
         }
     response = requests.get(link, params=params)
     data = json.loads(response.text)

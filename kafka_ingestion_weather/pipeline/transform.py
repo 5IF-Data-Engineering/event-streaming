@@ -1,5 +1,4 @@
 import pandas as pd
-from event_streaming.settings import BASE_DIR
 
 
 def transform_data(data, daily=None):
@@ -10,8 +9,8 @@ def transform_data(data, daily=None):
     :return: list of data in json format
     """
     result = []
+    df = pd.DataFrame(data)  # test
     if daily is None:
-        df = pd.DataFrame(data['hourly']) # test
         for index, row in df.iterrows():
             data = {
                 "time": row['time'],
@@ -36,7 +35,6 @@ def transform_data(data, daily=None):
             }
             result.append(data)
     else:
-        df = pd.DataFrame(data)
         for index, row in df.iterrows():
             data = {
                 "time": row['time'],
