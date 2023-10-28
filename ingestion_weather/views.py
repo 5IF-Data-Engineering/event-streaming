@@ -30,7 +30,7 @@ def ingestionWeatherDataPipeline(request):
     producer_event(topic_name, name_event, description_event)
 
     # Transformation
-    transformed_data = transform_data(data, daily)
+    transformed_data = transform_data(data, city)
     if daily is None:
         name_event = "Hourly weather transformation for " + city
         description_event = "Hourly weather transformation for " + city + " from " + start_date + " to " + end_date

@@ -14,13 +14,14 @@ def kafkaIngestionWeatherDataPipeline(request):
     start_date = request.query_params.get('start_date', None)
     end_date = request.query_params.get('end_date', None)
     daily = request.query_params.get('daily', None)
+    city = request.query_params.get('city', None)
 
     # Start pipeline
     # Extraction
     producer_extract_data(transform_topic_name, lat, lon, start_date, end_date, daily)
 
     # Transformation
-    consumer_transform_data(transform_topic_name, load_topic_name, daily)
+    consumer_transform_data(transform_topic_name, load_topic_name, city)
 
     # Load
     consumer_load_data(load_topic_name, daily)

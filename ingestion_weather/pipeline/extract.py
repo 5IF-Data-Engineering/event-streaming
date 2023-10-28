@@ -29,5 +29,8 @@ def extract_data(lat: str, lon: str, start_date: str, end_date: str, daily=None)
             "timezone": "America/Toronto"
         }
     response = requests.get(link, params=params)
-    data = json.loads(response.text)
+    if daily is None:
+        data = json.loads(response.text)['hourly']
+    else:
+        data = json.loads(response.text)['daily']
     return data
