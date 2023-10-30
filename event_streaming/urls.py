@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('ingestion_weather.urls')),
     path('', include('kafka_ingestion_weather.urls')),
     path('', include('ingestion_bus_delay.urls')),
+    path('', include('staging_weather.urls')),
 ]

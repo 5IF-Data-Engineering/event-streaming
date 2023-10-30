@@ -23,6 +23,12 @@ MONGO_PORT = os.environ.get('MONGO_PORT', '27017')
 MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'root')
 MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'example')
 
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
+POSTGRES_PORT = os.environ.get('POSTGRES_PORT', '5432')
+POSTGRES_USERNAME = os.environ.get('POSTGRES_USERNAME', 'postgres')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
+POSTGRES_DB = os.environ.get('POSTGRES_DB', 'deng')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -58,6 +64,7 @@ INSTALLED_APPS = [
     'ingestion_weather.apps.IngestionWeatherConfig',
     'kafka_ingestion_weather.apps.KafkaIngestionWeatherConfig',
     'ingestion_bus_delay.apps.IngestionBusDelayConfig',
+    'staging_weather.apps.StagingWeatherConfig',
 ]
 
 MIDDLEWARE = [

@@ -11,10 +11,10 @@ def transform_data(data, city):
     """
     df = pd.DataFrame(data)
     df['city'] = city
-    df['year'] = df['time'].apply(lambda x: x[:4])
-    df['month'] = df['time'].apply(lambda x: x[5:7])
-    df['day'] = df['time'].apply(lambda x: x[8:10])
+    df['year'] = df['time'].apply(lambda x: int(x[:4]))
+    df['month'] = df['time'].apply(lambda x: int(x[5:7]))
+    df['day'] = df['time'].apply(lambda x: int(x[8:10]))
     df['day_of_week'] = df['time'].apply(lambda x: datetime.datetime.strptime(x[:10], '%Y-%m-%d').strftime('%A'))
-    df['hour'] = df['time'].apply(lambda x: x[11:13])
+    df['hour'] = df['time'].apply(lambda x: int(x[11:13]))
     records = df.to_dict(orient='records')
     return records
