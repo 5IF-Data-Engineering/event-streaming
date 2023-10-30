@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ingestion_weather.apps.IngestionWeatherConfig',
     'kafka_ingestion_weather.apps.KafkaIngestionWeatherConfig',
+    'ingestion_bus_delay.apps.IngestionBusDelayConfig',
 ]
 
 MIDDLEWARE = [

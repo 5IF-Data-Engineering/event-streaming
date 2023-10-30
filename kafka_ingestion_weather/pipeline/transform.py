@@ -11,5 +11,8 @@ def transform_data(data, city):
     result = []
     df = pd.DataFrame(data)  # test
     df['city'] = city
+    df['year'] = df['time'].apply(lambda x: x[:4])
+    df['month'] = df['time'].apply(lambda x: x[5:7])
+    df['day'] = df['time'].apply(lambda x: x[8:10])
     records = df.to_dict(orient='records')
     return records
