@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'kafka_ingestion_weather.apps.KafkaIngestionWeatherConfig',
     'ingestion_bus_delay.apps.IngestionBusDelayConfig',
     'staging_weather.apps.StagingWeatherConfig',
+    'staging_bus_delay.apps.StagingBusDelayConfig',
 ]
 
 MIDDLEWARE = [
