@@ -275,7 +275,7 @@ def load_data_year_month_weekday_weekend(transformed_data):
         database=POSTGRES_DB,
     )
     cur = conn.cursor()
-    for i, data in enumerate(transformed_data):
+    for data in transformed_data:
         query = """
             INSERT INTO staging_weather_year_month_weekday_weekend (id, year, month, day_type, avg_temperature, min_temperature,
                 max_temperature, avg_humidity, avg_rain, max_rain, min_rain,
@@ -285,13 +285,8 @@ def load_data_year_month_weekday_weekend(transformed_data):
         data_month = str(data["month"])
         if data["month"] < 10:
             data_month = "0" + str(data["month"])
-        data_i = str(i)
-        if i < 10:
-            data_i = "00" + str(i)
-        elif i < 100:
-            data_i = "0" + str(i)
         params = (
-            data["day_type"] + data_i + str(data["year"]) + data_month,
+            data["day_type"] + str(data["year"]) + data_month,
             data["year"],
             data["month"],
             data["day_type"],

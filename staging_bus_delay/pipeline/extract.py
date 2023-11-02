@@ -2,11 +2,9 @@ from pymongo import MongoClient
 from event_streaming.settings import (
     MONGO_HOST,
     MONGO_PORT,
-    MONGO_USERNAME,
-    MONGO_PASSWORD,
 )
 
-client = MongoClient(f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/')
+client = MongoClient(f'mongodb://{MONGO_HOST}:{MONGO_PORT}/')
 db = client['deng']
 collection = db['bus-delay']
 

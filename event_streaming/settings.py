@@ -20,8 +20,6 @@ KAFKA_PORT = os.environ.get('KAFKA_PORT', '9092')
 
 MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
 MONGO_PORT = os.environ.get('MONGO_PORT', '27017')
-MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'root')
-MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'example')
 
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
 POSTGRES_PORT = os.environ.get('POSTGRES_PORT', '5432')
