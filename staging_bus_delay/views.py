@@ -41,3 +41,4 @@ def stagingWeekdayWeekendHourLocationIncidentBusDelayDataPipeline(request):
     load_data_weekday_weekend_hour_location_incident(transformed_data)
     processing_time = time.time() - start_time
     return JsonResponse({"processing_time": processing_time})
+

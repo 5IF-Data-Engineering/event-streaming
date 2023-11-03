@@ -4,7 +4,7 @@ from event_streaming.settings import (
     MONGO_PORT,
 )
 
-client = MongoClient(f'mongodb://{MONGO_HOST}:{MONGO_PORT}/')
+client = MongoClient(f'mongodb://{MONGO_HOST}:{MONGO_PORT}/?authSource=admin&readPreference=primary&ssl=false')
 db = client['deng']
 
 
