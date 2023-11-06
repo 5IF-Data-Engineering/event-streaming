@@ -22,5 +22,4 @@ urlpatterns = [
     path('', include('ingestion_bus_delay.urls')),
     path('', include('staging_weather.urls')),
     path('', include('staging_bus_delay.urls')),
-    path('', include('production_weather_bus.urls')),
 ]
