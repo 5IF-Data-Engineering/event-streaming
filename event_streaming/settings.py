@@ -15,9 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-KAFKA_HOST = os.environ.get('KAFKA_HOST', 'localhost')
-KAFKA_PORT = os.environ.get('KAFKA_PORT', '9092')
-
 MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
 MONGO_PORT = os.environ.get('MONGO_PORT', '27017')
 
@@ -60,7 +57,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ingestion_weather.apps.IngestionWeatherConfig',
-    'kafka_ingestion_weather.apps.KafkaIngestionWeatherConfig',
     'ingestion_bus_delay.apps.IngestionBusDelayConfig',
     'staging_weather.apps.StagingWeatherConfig',
     'staging_bus_delay.apps.StagingBusDelayConfig',
