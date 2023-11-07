@@ -102,7 +102,7 @@ def load_data_year_month_day(transformed_data):
     conn.close()
 
 
-def load_data_year_month_weekday_weekend(transformed_data):
+def load_full_data(transformed_data):
     """
     Load data to PostgreSQL
     :param transformed_data: data for PostgreSQL
@@ -118,19 +118,16 @@ def load_data_year_month_weekday_weekend(transformed_data):
     cur = conn.cursor()
     for data in transformed_data:
         query = """
-            INSERT INTO staging_weather_year_month_weekday_weekend (id, year, month, day_type, avg_temperature, min_temperature,
+            INSERT INTO staging_weather (year, month, day_type, hour, avg_temperature, min_temperature,
                 max_temperature, avg_humidity, avg_rain, max_rain, min_rain,
                 avg_wind_speed, max_wind_speed, min_wind_speed)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s, %s, %s)
         """
-        data_month = str(data["month"])
-        if data["month"] < 10:
-            data_month = "0" + str(data["month"])
         params = (
-            data["day_type"] + str(data["year"]) + data_month,
             data["year"],
             data["month"],
             data["day_type"],
+            data["hour"],
             data["avg_temperature"],
             data["min_temperature"],
             data["max_temperature"],

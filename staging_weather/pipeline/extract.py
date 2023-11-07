@@ -110,7 +110,7 @@ def extract_data_year_month_day():
     return cursor
 
 
-def extract_data_year_month_weekday_weekend():
+def extract_full_data():
     """
     Extract data from MongoDB
     :return: data from MongoDB
@@ -137,7 +137,8 @@ def extract_data_year_month_weekday_weekend():
                     '_id': {
                         'year': '$year',
                         'month': '$month',
-                        'dayType': '$dayType'
+                        'dayType': '$dayType',
+                        'hour': '$hour'
                     },
                     'avg_temperature': {
                         '$avg': '$temperature_2m'
