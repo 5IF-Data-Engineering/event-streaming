@@ -1,5 +1,5 @@
 import psycopg2
-from event_streaming.settings import (
+from pipeline_api.settings import (
     POSTGRES_PORT,
     POSTGRES_HOST,
     POSTGRES_USERNAME,

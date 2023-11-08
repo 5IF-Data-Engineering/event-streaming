@@ -1,4 +1,4 @@
-from event_streaming.settings import BASE_DIR
+from pipeline_api.settings import BASE_DIR
 import pandas as pd
 
 

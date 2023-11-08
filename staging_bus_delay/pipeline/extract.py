@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from event_streaming.settings import (
+from pipeline_api.settings import (
     MONGO_HOST,
     MONGO_PORT,
 )

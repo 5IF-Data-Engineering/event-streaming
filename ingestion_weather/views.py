@@ -21,7 +21,7 @@ def ingestionWeatherDataPipeline(request):
     data = extract_data(lat, lon, start_date, end_date, daily)
 
     # Transformation
-    transformed_data = transform_data(data, city)
+    transformed_data = transform_data(data, city, daily)
 
     # Load
     load_data(transformed_data, daily)

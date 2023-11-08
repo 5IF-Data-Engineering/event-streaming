@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'event_streaming.urls'
+ROOT_URLCONF = 'pipeline_api.urls'
 
 TEMPLATES = [
     {
@@ -91,7 +91,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'event_streaming.wsgi.application'
+WSGI_APPLICATION = 'pipeline_api.wsgi.application'
 
 
 # Database
