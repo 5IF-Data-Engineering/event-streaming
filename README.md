@@ -86,7 +86,7 @@ The staging API is used to process data from the staging area to the production 
 
   <tr>
     <td>staging_full_bus_delay/</td>
-    <td><code>staging_full_bus_delay/?year=%s&city=%s</code></td>
+    <td><code>staging_full_bus_delay/</code></td>
     <td>GET</td>
     <td>Process bus data from the staging area to the production area</td>
     <td></td>
