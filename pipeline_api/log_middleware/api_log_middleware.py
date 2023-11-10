@@ -15,14 +15,11 @@ def log_request(obj, request, logger_req):
     method = str(getattr(request, 'method', '')).upper()
     status_code = str(getattr(response, 'status_code', ''))
     request_path = request.get_full_path()
-    decoded_content = response.content.decode('utf-8')
-    json_content = json.loads(decoded_content)
-    message = json_content.get('message', '')
     if '200' <= status_code < '400':
         logger_req.info({
             "date": str(now_date),
             "time": str(now_time),
-            "message": message,
+            "message": '',
             "path": request_path,
             "response_time": str(response_ms),
             "method": method,
@@ -32,7 +29,7 @@ def log_request(obj, request, logger_req):
         logger_req.error({
             "date": str(now_date),
             "time": str(now_time),
-            "message": message,
+            "message": '',
             "path": request_path,
             "response_time": str(response_ms),
             "method": method,
