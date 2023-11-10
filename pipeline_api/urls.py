@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from pipeline_api.views import swagger_schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,4 +23,12 @@ urlpatterns = [
     path('', include('ingestion_bus_delay.urls')),
     path('', include('staging_weather.urls')),
     path('', include('staging_bus_delay.urls')),
+    path('', include('enrichment_bus_weather.urls')),
+
+    re_path(r'^doc(?P<format>\.json|\.yaml)$',
+            swagger_schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('doc/', swagger_schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),
+    path('redoc/', swagger_schema_view.with_ui('redoc', cache_timeout=0),
+         name='schema-redoc'),
 ]

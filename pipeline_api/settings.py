@@ -24,6 +24,9 @@ POSTGRES_USERNAME = os.environ.get('POSTGRES_USERNAME', 'postgres')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
 POSTGRES_DB = os.environ.get('POSTGRES_DB', 'deng')
 
+REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
+REDIS_DB = os.environ.get('REDIS_DB', '0')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -60,6 +63,9 @@ INSTALLED_APPS = [
     'ingestion_bus_delay.apps.IngestionBusDelayConfig',
     'staging_weather.apps.StagingWeatherConfig',
     'staging_bus_delay.apps.StagingBusDelayConfig',
+    'enrichment_bus_weather.apps.EnrichmentBusWeatherConfig',
+    'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pipeline_api.log_middleware.api_log_middleware.APILogMiddleware',
 ]
 
 ROOT_URLCONF = 'pipeline_api.urls'
@@ -93,7 +100,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pipeline_api.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -104,6 +110,29 @@ DATABASES = {
     }
 }
 
+# Logging
+# https://docs.djangoproject.com/en/3.2/topics/logging/
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'redis': {
+            'class': 'pipeline_api.handlers.RedisHandler',
+            'host': REDIS_HOST,  # Update with your Redis server details
+            'port': REDIS_PORT,  # Update with your Redis server port
+            'db': REDIS_DB,  # Update with your Redis database number
+            'key': 'logging_queue',  # Update with the desired Redis key
+        },
+    },
+    'loggers': {
+        'pipeline_api.log_middleware.api_log_middleware': {
+            'handlers': ['redis'],
+            'level': 'INFO',  # Set the desired log level
+            'propagate': True,
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -123,7 +152,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -138,7 +166,6 @@ USE_L10N = True
 USE_TZ = True
 
 PYTHONUNBUFFERED = os.environ.get('PYTHONUNBUFFERED', '1')
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

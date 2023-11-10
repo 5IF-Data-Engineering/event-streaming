@@ -27,4 +27,4 @@ def ingestionWeatherDataPipeline(request):
     load_data(transformed_data, daily)
 
     processing_time = time.time() - start_time
-    return JsonResponse({"processing_time": processing_time})
+    return JsonResponse({"processing_time": processing_time, "message": "Weather data successfully ingested"})
