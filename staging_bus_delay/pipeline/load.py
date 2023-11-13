@@ -4,7 +4,7 @@ from pipeline_api.settings import (
     POSTGRES_HOST,
     POSTGRES_USERNAME,
     POSTGRES_PASSWORD,
-    POSTGRES_DB,
+    POSTGRES_DB_STAGING,
 )
 
 
@@ -19,7 +19,7 @@ def load_data_weekday_weekend_hour(transformed_data):
         port=POSTGRES_PORT,
         user=POSTGRES_USERNAME,
         password=POSTGRES_PASSWORD,
-        database=POSTGRES_DB,
+        database=POSTGRES_DB_STAGING,
     )
     cur = conn.cursor()
     for data in transformed_data:
@@ -64,7 +64,7 @@ def load_data_weekday_weekend_hour_location_incident(transformed_data):
         port=POSTGRES_PORT,
         user=POSTGRES_USERNAME,
         password=POSTGRES_PASSWORD,
-        database=POSTGRES_DB,
+        database=POSTGRES_DB_STAGING,
     )
     cur = conn.cursor()
     for data in transformed_data:
@@ -105,7 +105,7 @@ def load_full_data(transformed_data):
         port=POSTGRES_PORT,
         user=POSTGRES_USERNAME,
         password=POSTGRES_PASSWORD,
-        database=POSTGRES_DB,
+        database=POSTGRES_DB_STAGING,
     )
     cur = conn.cursor()
     for data in transformed_data:

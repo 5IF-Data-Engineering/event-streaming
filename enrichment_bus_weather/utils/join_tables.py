@@ -3,7 +3,7 @@ from pipeline_api.settings import (
     POSTGRES_PORT,
     POSTGRES_USERNAME,
     POSTGRES_PASSWORD,
-    POSTGRES_DB,
+    POSTGRES_DB_STAGING,
 )
 import psycopg2
 
@@ -14,7 +14,7 @@ def join_bus_weather_tables():
         port=POSTGRES_PORT,
         user=POSTGRES_USERNAME,
         password=POSTGRES_PASSWORD,
-        database=POSTGRES_DB,
+        database=POSTGRES_DB_STAGING
     )
     cur = conn.cursor()
     query = """
