@@ -18,7 +18,7 @@ Based on the architecture, the API is divided into three parts:
 
 Base API URL: `http://localhost:8000/`
 ## Ingestion
-The ingestion API is used to ingest data from the source to the staging area.
+The ingestion API is used to ingest data from the source to the ingestion area.
 
 <table>
    <tr>
@@ -33,7 +33,7 @@ The ingestion API is used to ingest data from the source to the staging area.
     <td rowspan="6">ingestion_weather/</td>
     <td rowspan="6"><code>ingestion_weather/?lat=%s&lon=%s&start_date=%s&end_date=%s&city=%s&daily=%s</code></td>
     <td rowspan="6">GET</td>
-    <td rowspan="6">Ingest weather data from the source to the staging area</td>
+    <td rowspan="6">Ingest weather data from the source to the ingestion area</td>
     <td>lat</td>
   </tr>
     <tr>
@@ -56,7 +56,7 @@ The ingestion API is used to ingest data from the source to the staging area.
     <td rowspan="2">ingestion_bus_delay/</td>
     <td rowspan="2"><code>ingestion_bus_delay/?year=%s&city=%s</code></td>
     <td rowspan="2">GET</td>
-    <td rowspan="2">Ingest bus data from the source to the staging area</td>
+    <td rowspan="2">Ingest bus data from the source to the ingestion area</td>
     <td>year</td>
   </tr>
     <tr>
@@ -65,7 +65,7 @@ The ingestion API is used to ingest data from the source to the staging area.
 </table>
 
 ## Staging
-The staging API is used to process data from the staging area to the production area.
+The staging API is used to process data from the ingestion to the staging area.
 
 <table>
    <tr>
@@ -80,7 +80,7 @@ The staging API is used to process data from the staging area to the production 
     <td>staging_full_weather/</td>
     <td><code>staging_full_weather/</code></td>
     <td>GET</td>
-    <td>Process weather data from the staging area to the production area</td>
+    <td>Process weather data from the ingestion to the staging area</td>
     <td></td>
   </tr>
 
@@ -88,13 +88,13 @@ The staging API is used to process data from the staging area to the production 
     <td>staging_full_bus_delay/</td>
     <td><code>staging_full_bus_delay/</code></td>
     <td>GET</td>
-    <td>Process bus data from the staging area to the production area</td>
+    <td>Process bus data from the ingestion to the staging area</td>
     <td></td>
   </tr>
 </table>
 
 ## Enrichment
-The enrichment API is used to enrich data from the production area.
+The enrichment API is used to enrich data inside the staging area.
 
 <table>
    <tr>
@@ -109,7 +109,7 @@ The enrichment API is used to enrich data from the production area.
     <td>join_bus_weather/</td>
     <td><code>join_bus_weather/</code></td>
     <td>GET</td>
-    <td>Enrich weather data from the production area</td>
+    <td>Enrich weather data from the staging area</td>
     <td></td>  
   </tr>
 </table>

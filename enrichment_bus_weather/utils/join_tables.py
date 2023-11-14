@@ -35,3 +35,4 @@ def join_bus_weather_tables():
     conn.commit()
     cur.close()
     conn.close()
+    
