@@ -13,6 +13,8 @@ def transform_data(data: pd.DataFrame, city: str):
                          'Incident': 'incident',
                          'Min Delay': 'min_delay', 'Min Gap': 'min_gap', 'Direction': 'direction',
                          'Vehicle': 'vehicle'}, inplace=True)
+    if "Time Tmp" in data.columns:
+        data.drop(columns=['Time Tmp'], inplace=True)
     data['year'] = data['date'].apply(lambda x: int(x.year))
     data['month'] = data['date'].apply(lambda x: int(x.month))
     data['day'] = data['date'].apply(lambda x: int(x.day))
