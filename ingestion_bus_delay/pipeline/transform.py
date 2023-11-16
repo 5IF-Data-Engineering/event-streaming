@@ -1,5 +1,6 @@
 import pandas as pd
 import datetime
+from pandas import Timestamp
 
 
 def transform_data(data: pd.DataFrame, city: str):
@@ -23,6 +24,8 @@ def transform_data(data: pd.DataFrame, city: str):
     data['incident'] = data['incident'].apply(lambda x: str(x))
     data['city'] = city
     if isinstance(data['time'][0], datetime.time):
+        data['time'] = data['time'].apply(lambda x: x.strftime('%H:%M:%S'))
+    elif isinstance(data['time'][0], Timestamp):
         data['time'] = data['time'].apply(lambda x: x.strftime('%H:%M:%S'))
     data['hour'] = data['time'].apply(lambda x: int(x[:2]))
     return data

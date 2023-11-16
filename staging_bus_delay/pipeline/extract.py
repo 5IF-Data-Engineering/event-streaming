@@ -129,13 +129,19 @@ def extract_data_weekday_weekend_hour_location_incident():
     return cursor
 
 
-def extract_full_data():
+def extract_full_data(year):
     """
-        Extract data from MongoDB for 3 dimensions: time, location, incident
-        :return: data from MongoDB
-        """
+    Extract data from MongoDB for 3 dimensions: time, location, incident
+    :param year: year to extract data
+    :return: data from MongoDB
+    """
     cursor = collection.aggregate(
         [
+            {
+                '$match': {
+                    'year': int(year)
+                }
+            },
             {
                 '$addFields': {
                     'dayType': {
@@ -154,7 +160,6 @@ def extract_full_data():
             {
                 '$group': {
                     '_id': {
-                        'year': '$year',
                         'month': '$month',
                         'dayType': '$dayType',
                         'hour': '$hour',

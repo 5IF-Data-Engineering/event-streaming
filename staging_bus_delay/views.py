@@ -48,12 +48,13 @@ def stagingWeekdayWeekendHourLocationIncidentBusDelayDataPipeline(request):
 
 @api_view(['GET'])
 def stagingFullBusDelayDataPipeline(request):
+    year = request.query_params.get('year', None)
     # Start pipeline
     start_time = time.time()
     # Extraction
-    data = extract_full_data()
+    data = extract_full_data(year)
     # Transformation
-    transformed_data = transform_full_data(data)
+    transformed_data = transform_full_data(data, year)
     # Load
     load_full_data(transformed_data)
     processing_time = time.time() - start_time

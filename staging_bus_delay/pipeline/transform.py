@@ -50,17 +50,18 @@ def transform_data_weekday_weekend_hour_location_incident(cursor):
     return result
 
 
-def transform_full_data(cursor):
+def transform_full_data(cursor, year):
     """
     Transform data from MongoDB to PostgreSQL
     :param cursor: data from MongoDB
+    :param year: year
     :return: data for PostgreSQL
     """
     result = []
     for document in cursor:
         result.append(
             {
-                "year": document["_id"]["year"],
+                "year": int(year),
                 "month": document["_id"]["month"],
                 "day_type": document["_id"]["dayType"],
                 "hour": document["_id"]["hour"],
