@@ -18,14 +18,12 @@ def join_bus_weather_tables():
     )
     cur = conn.cursor()
     query = """
-        DROP TABLE IF EXISTS joined_bus_weather;
-        
+        INSERT INTO joined_bus_weather
         SELECT a.year, a.month, a.day_type, a.hour, b.location, b.incident, a.avg_temperature, 
         a.min_temperature, a.max_temperature, a.avg_humidity, a.avg_rain, a.max_rain, a.min_rain, 
         a.avg_wind_speed, a.max_wind_speed, a.min_wind_speed, 
         b.avg_delay, b.min_delay, b.max_delay, b.count_delay, 
         b.avg_gap, b.min_gap, b.max_gap, b.count_gap
-        INTO joined_bus_weather
         FROM staging_weather a 
         INNER JOIN staging_bus_delay b
         ON a.year = b.year AND a.month = b.month AND a.day_type = b.day_type AND a.hour = b.hour

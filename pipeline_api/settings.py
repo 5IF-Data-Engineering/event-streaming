@@ -23,7 +23,7 @@ POSTGRES_PORT = os.environ.get('POSTGRES_PORT', '5432')
 POSTGRES_USERNAME = os.environ.get('POSTGRES_USERNAME', 'postgres')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
 POSTGRES_DB_STAGING = os.environ.get('POSTGRES_DB_STAGING', 'deng_staging')
-# POSTGRES_DB_PRODUCTION = os.environ.get('POSTGRES_DB_PRODUCTION', 'deng_production')
+POSTGRES_DB_PRODUCTION = os.environ.get('POSTGRES_DB_PRODUCTION', 'deng_production')
 
 REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
 REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
@@ -65,8 +65,10 @@ INSTALLED_APPS = [
     'staging_weather.apps.StagingWeatherConfig',
     'staging_bus_delay.apps.StagingBusDelayConfig',
     'enrichment_bus_weather.apps.EnrichmentBusWeatherConfig',
+    'production_star_schema.apps.ProductionStarSchemaConfig',
     'rest_framework_swagger',
     'drf_yasg',
+    'django_redis',
 ]
 
 MIDDLEWARE = [
@@ -108,6 +110,22 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# Cache
+# https://docs.djangoproject.com/en/3.2/topics/cache/
+
+# Cache time to live is 15 minutes
+CACHE_TTL = 60 * 15
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
 

@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('staging_weather.urls')),
     path('', include('staging_bus_delay.urls')),
     path('', include('enrichment_bus_weather.urls')),
+    path('', include('production_star_schema.urls')),
 
     re_path(r'^doc(?P<format>\.json|\.yaml)$',
             swagger_schema_view.without_ui(cache_timeout=0), name='schema-json'),
