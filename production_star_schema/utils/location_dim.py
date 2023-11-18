@@ -7,6 +7,7 @@ from pipeline_api.settings import (
     POSTGRES_DB_PRODUCTION
 )
 import psycopg2
+from geopy.geocoders import Nominatim
 
 
 def insert_location_dim_data():
@@ -32,11 +33,17 @@ def insert_location_dim_data():
         database=POSTGRES_DB_PRODUCTION
     )
     cursor_prod = conn_prod.cursor()
+    geolocator = Nominatim(user_agent="pipeline_api")
     for result in results:
-        insert_query = """INSERT INTO production_location_dimension (name) 
-            VALUES (%s)
+        name_location = f"{result[0]}, Toronto, Ontario, Canada"
+        try:
+            location = geolocator.geocode(name_location)
+            result = (result[0], location.latitude, location.longitude)
+        except:
+            result = (result[0], None, None)
+        insert_query = """INSERT INTO production_location_dimension (name, latitude, longitude) 
+            VALUES (%s, %s, %s)
         """
-        result = (result[0],)
         cursor_prod.execute(insert_query, result)
         conn_prod.commit()
     cursor_stag.close()
