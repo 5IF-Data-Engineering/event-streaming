@@ -8,6 +8,7 @@ from pipeline_api.settings import (
     SNOWFLAKE_PASSWORD
 )
 import psycopg2
+import snowflake.connector
 from geopy.geocoders import Nominatim
 
 
@@ -26,7 +27,7 @@ def insert_location_dim_data():
     """
     cursor_stag.execute(search_query)
     results = cursor_stag.fetchall()
-    conn_prod = psycopg2.connect(
+    conn_prod = snowflake.connector.connect(
         user=SNOWFLAKE_USERNAME,
         password=SNOWFLAKE_PASSWORD,
         account='ee65799.europe-west4.gcp',

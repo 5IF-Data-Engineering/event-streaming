@@ -23,7 +23,7 @@ def createProductionTables(request):
     processing_time = time.time() - start_time
     # Cache data
     data_to_cache = json.dumps({"processing_time": processing_time})
-    cache.set(cached_key, data_to_cache)
+    cache.set(cached_key, data_to_cache, timeout=60 * 60 * 24 * 7)
     return JsonResponse({"processing_time": processing_time})
 
 
@@ -40,7 +40,7 @@ def addTimeDimData(request):
     processing_time = time.time() - start_time
     # Cache data
     data_to_cache = json.dumps({"processing_time": processing_time})
-    cache.set(cached_key, data_to_cache)
+    cache.set(cached_key, data_to_cache, timeout=60 * 60 * 24 * 7)
     return JsonResponse({"processing_time": processing_time})
 
 
@@ -57,7 +57,7 @@ def addLocationDimData(request):
     processing_time = time.time() - start_time
     # Cache data
     data_to_cache = json.dumps({"processing_time": processing_time})
-    cache.set(cached_key, data_to_cache)
+    cache.set(cached_key, data_to_cache, timeout=60 * 60 * 24 * 7)
     return JsonResponse({"processing_time": processing_time})
 
 
@@ -74,5 +74,5 @@ def addIncidentDimData(request):
     processing_time = time.time() - start_time
     # Cache data
     data_to_cache = json.dumps({"processing_time": processing_time})
-    cache.set(cached_key, data_to_cache)
+    cache.set(cached_key, data_to_cache, timeout=60 * 60 * 24 * 7)
     return JsonResponse({"processing_time": processing_time})

@@ -32,13 +32,13 @@ def create_prod_tables():
             year int NOT NULL,
             month int NOT NULL,
             day_type varchar(255) NOT NULL,
-            hour int NOT NULL,
+            hour int NOT NULL
         );
     """
     create_incident_dim = """
         CREATE OR REPLACE TABLE DATA_PROD.INCIDENT_DIM (
             id bigint NOT NULL PRIMARY KEY AUTOINCREMENT,
-            name varchar(255) NOT NULL,
+            name varchar(255) NOT NULL
         );
     """
     create_fact_table = """

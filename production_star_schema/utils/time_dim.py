@@ -21,6 +21,10 @@ def insert_time_dim_data():
     )
     cursor_stag = conn_stag.cursor()
     search_query = """
+        DROP TABLE IF EXISTS temp_year;
+        DROP TABLE IF EXISTS temp_month;
+        DROP TABLE IF EXISTS temp_day_type;
+        DROP TABLE IF EXISTS temp_hour;
         SELECT DISTINCT year INTO temp_year FROM joined_bus_weather
         ORDER BY year ASC;
 
