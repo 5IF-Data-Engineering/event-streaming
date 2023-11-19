@@ -4,9 +4,11 @@ from pipeline_api.settings import (
     POSTGRES_USERNAME,
     POSTGRES_PASSWORD,
     POSTGRES_DB_STAGING,
-    POSTGRES_DB_PRODUCTION
+    SNOWFLAKE_USERNAME,
+    SNOWFLAKE_PASSWORD
 )
 import psycopg2
+import snowflake.connector
 
 
 def insert_time_dim_data():
@@ -39,20 +41,22 @@ def insert_time_dim_data():
     """
     cursor_stag.execute(search_query_all)
     results = cursor_stag.fetchall()
-    conn_prod = psycopg2.connect(
-        host=POSTGRES_HOST,
-        port=POSTGRES_PORT,
-        user=POSTGRES_USERNAME,
-        password=POSTGRES_PASSWORD,
-        database=POSTGRES_DB_PRODUCTION
+    conn_prod = snowflake.connector.connect(
+        user=SNOWFLAKE_USERNAME,
+        password=SNOWFLAKE_PASSWORD,
+        account='ee65799.europe-west4.gcp',
+        warehouse='COMPUTE_WH',
+        database='DENG_PRODUCTION',
+        schema='DATA_PROD'
     )
     cursor_prod = conn_prod.cursor()
     for result in results:
-        insert_query = """INSERT INTO production_time_dimension (year, month, day_type, hour) 
+        insert_query = """
+            INSERT INTO DENG_PRODUCTION.DATA_PROD.TIME_DIM (year, month, day_type, hour) 
             VALUES (%s, %s, %s, %s)
-            """
+        """
         cursor_prod.execute(insert_query, result)
-        conn_prod.commit()
+    conn_prod.commit()
     cursor_stag.close()
     conn_stag.close()
     cursor_prod.close()

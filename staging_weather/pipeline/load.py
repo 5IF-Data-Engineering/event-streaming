@@ -48,7 +48,7 @@ def load_data_year_month(transformed_data):
             data["min_wind_speed"],
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()
 
@@ -97,7 +97,7 @@ def load_data_year_month_day(transformed_data):
             data["min_wind_speed"],
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()
 
@@ -140,7 +140,7 @@ def load_full_data(transformed_data):
             data["min_wind_speed"],
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()
 
@@ -182,6 +182,6 @@ def load_data_weekday_weekend_hour(transformed_data):
             data["min_wind_speed"],
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()

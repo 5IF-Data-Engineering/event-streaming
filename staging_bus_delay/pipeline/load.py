@@ -48,7 +48,7 @@ def load_data_weekday_weekend_hour(transformed_data):
             data["count_gap"],
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()
 
@@ -89,7 +89,7 @@ def load_data_weekday_weekend_hour_location_incident(transformed_data):
             data["count_gap"]
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()
 
@@ -132,7 +132,7 @@ def load_full_data(transformed_data):
             data["count_gap"]
         )
         cur.execute(query, params)
-        conn.commit()
+    conn.commit()
     cur.close()
     conn.close()
     

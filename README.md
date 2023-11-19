@@ -5,6 +5,7 @@
   - [Ingestion](#ingestion)
   - [Staging](#staging)
   - [Enrichment](#enrichment)
+  - [Production](#production)
 
 # Introduction
 Pipeline API is a Restful API that is built using [Django](https://www.djangoproject.com/) and [Django Rest Framework](https://www.django-rest-framework.org/). The API is used to trigger the data pipeline and to get the status of the data pipeline.
