@@ -50,7 +50,7 @@ The ingestion API is used to ingest data from the source to the ingestion area.
         <td>city</td>
     </tr>
     <tr>
-        <td>daily</td>
+        <td>daily (optional)</td>
     </tr>
 
   <tr>
@@ -87,10 +87,10 @@ The staging API is used to process data from the ingestion to the staging area.
 
   <tr>
     <td>staging_full_bus_delay/</td>
-    <td><code>staging_full_bus_delay/</code></td>
+    <td><code>staging_full_bus_delay/?year=%s</code></td>
     <td>GET</td>
     <td>Process bus data from the ingestion to the staging area</td>
-    <td></td>
+    <td>year</td>
   </tr>
 </table>
 
@@ -112,5 +112,50 @@ The enrichment API is used to enrich data inside the staging area.
     <td>GET</td>
     <td>Enrich weather data from the staging area</td>
     <td></td>  
+  </tr>
+</table>
+
+## Production
+The production API is used to process data from the staging to the production area on Snowflake.
+
+<table>
+  <tr>
+    <th>Endpoint</th>
+    <th>Full path</th>
+    <th>Method</th>
+    <th>Description</th>
+    <th>Parameters</th>  
+  </tr>
+
+  <tr>
+    <td>create_production_tables/</td>
+    <td><code>create_production_tables/</code></td>
+    <td>GET</td>
+    <td>Create the fact table and dimension tables on Snowflake</td>
+    <td></td>  
+  </tr>
+
+  <tr>
+    <td>add_time_data/</td>
+    <td><code>add_time_data/</code></td>
+    <td>GET</td>
+    <td>Load time data into time dimension table</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>add_location_data/</td>
+    <td><code>add_location_data/</code></td>
+    <td>GET</td>
+    <td>Load data into location dimension table</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>add_incident_data/</td>
+    <td><code>add_incident_data/</code></td>
+    <td>GET</td>
+    <td>Load data into incident dimension table</td>
+    <td></td>
   </tr>
 </table>
