@@ -1,6 +1,9 @@
 from django.http import HttpResponse, JsonResponse, FileResponse
 from rest_framework.decorators import api_view
 import time
+from pipeline_api.settings import (
+    CACHE_TTL
+)
 from staging_bus_delay.pipeline.extract import (
     extract_full_data
 )
@@ -34,5 +37,5 @@ def stagingFullBusDelayDataPipeline(request):
     processing_time = time.time() - start_time
     # Cache data
     data_to_cache = json.dumps({"processing_time": processing_time})
-    cache.set(cached_key, data_to_cache, timeout=60 * 60 * 24 * 7)
+    cache.set(cached_key, data_to_cache, timeout=CACHE_TTL)
     return JsonResponse({"processing_time": processing_time})

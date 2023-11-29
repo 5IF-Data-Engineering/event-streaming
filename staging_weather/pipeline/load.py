@@ -24,26 +24,23 @@ def load_full_data(transformed_data):
     cur = conn.cursor()
     for data in transformed_data:
         query = """
-            INSERT INTO staging_weather (year, month, day_type, hour, avg_temperature, min_temperature,
-                max_temperature, avg_humidity, avg_rain, max_rain, min_rain,
-                avg_wind_speed, max_wind_speed, min_wind_speed)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s, %s, %s)
+            INSERT INTO staging_weather (year, month, day, day_of_week, day_type, hour, 
+            temperature, humidity, precipitation, rain, snowfall, windspeed)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s)
         """
         params = (
             data["year"],
             data["month"],
+            data["day"],
+            data["day_of_week"],
             data["day_type"],
             data["hour"],
-            data["avg_temperature"],
-            data["min_temperature"],
-            data["max_temperature"],
-            data["avg_humidity"],
-            data["avg_rain"],
-            data["max_rain"],
-            data["min_rain"],
-            data["avg_wind_speed"],
-            data["max_wind_speed"],
-            data["min_wind_speed"],
+            data["temperature"],
+            data["humidity"],
+            data["precipitation"],
+            data["rain"],
+            data["snowfall"],
+            data["windspeed"]
         )
         cur.execute(query, params)
     conn.commit()

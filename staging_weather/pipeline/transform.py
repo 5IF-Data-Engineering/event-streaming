@@ -8,20 +8,18 @@ def transform_full_data(cursor):
     for document in cursor:
         result.append(
             {
-                "year": document["_id"]["year"],
-                "month": document["_id"]["month"],
-                "day_type": document["_id"]["dayType"],
-                "hour": document["_id"]["hour"],
-                "avg_temperature": document["avg_temperature"],
-                "min_temperature": document["min_temperature"],
-                "max_temperature": document["max_temperature"],
-                "avg_humidity": document["avg_humidity"],
-                "avg_rain": document["avg_rain"],
-                "max_rain": document["max_rain"],
-                "min_rain": document["min_rain"],
-                "avg_wind_speed": document["avg_wind_speed"],
-                "max_wind_speed": document["max_wind_speed"],
-                "min_wind_speed": document["min_wind_speed"],
+                "year": document["year"],
+                "month": document["month"],
+                "day": document["day"],
+                "day_of_week": document["day_of_week"],
+                "day_type": document["day_type"],
+                "hour": document["hour"],
+                "temperature": document["temperature_2m"],
+                "humidity": document["relativehumidity_2m"],
+                "precipitation": document["precipitation"],
+                "rain": document["rain"],
+                "snowfall": document["snowfall"],
+                "windspeed": document["windspeed_10m"]
             }
         )
     return result

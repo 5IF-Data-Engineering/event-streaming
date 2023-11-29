@@ -24,26 +24,23 @@ def load_full_data(transformed_data):
     cur = conn.cursor()
     for data in transformed_data:
         query = """
-            INSERT INTO staging_bus_delay (year, month, day_type, hour, location, incident,
-            avg_delay, min_delay, max_delay, count_delay, 
-            avg_gap, min_gap, max_gap, count_gap)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s, %s, %s, %s)
+            INSERT INTO staging_bus_delay (year, month, day, day_of_week, day_type, hour, location, incident,
+            delay, gap, direction, vehicle)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
         params = (
             data["year"],
             data["month"],
+            data["day"],
+            data["day_of_week"],
             data["day_type"],
             data["hour"],
             data["location"],
             data["incident"],
-            data["avg_delay"],
-            data["min_delay"],
-            data["max_delay"],
-            data["count_delay"],
-            data["avg_gap"],
-            data["min_gap"],
-            data["max_gap"],
-            data["count_gap"]
+            data["delay"],
+            data["gap"],
+            data["direction"],
+            data["vehicle"]
         )
         cur.execute(query, params)
     conn.commit()

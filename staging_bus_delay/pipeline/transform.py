@@ -10,19 +10,17 @@ def transform_full_data(cursor, year):
         result.append(
             {
                 "year": int(year),
-                "month": document["_id"]["month"],
-                "day_type": document["_id"]["dayType"],
-                "hour": document["_id"]["hour"],
-                "location": document["_id"]["location"],
-                "incident": document["_id"]["incident"],
-                "avg_delay": document["avg_delay"],
-                "min_delay": document["min_delay"],
-                "max_delay": document["max_delay"],
-                "count_delay": document["count_delay"],
-                "avg_gap": document["avg_gap"],
-                "min_gap": document["min_gap"],
-                "max_gap": document["max_gap"],
-                "count_gap": document["count_gap"]
+                "month": document["month"],
+                "day": document["day"],
+                "day_of_week": document["day_of_week"],
+                "day_type": document["day_type"],
+                "hour": document["hour"],
+                "location": document["location"],
+                "incident": document["incident"],
+                "delay": document["min_delay"],
+                "gap": document["min_gap"],
+                "direction": document["direction"],
+                "vehicle": document["vehicle"]
             }
         )
     return result
