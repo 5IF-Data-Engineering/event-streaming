@@ -1,22 +1,18 @@
 import logging
-import redis
-import json
 
 
-class RedisHandler(logging.Handler):
-    def __init__(self, host='redis', port=6379, db=0, key='logging_queue'):
-        super().__init__()
-        self.redis_client = redis.StrictRedis(host=host, port=port, db=db)
-        self.key = key
-
-    def format(self, record):
-        return json.dumps(record.__dict__)
+class RequestHandler(logging.FileHandler):
+    def __init__(self, filename, mode='a', encoding=None, delay=False):
+        super().__init__(filename, mode, encoding, delay)
 
     def emit(self, record):
-        try:
-            log_entry = self.format(record)
-            json_data = json.loads(log_entry)
-            save_data = json_data['msg']
-            self.redis_client.rpush(self.key, json.dumps(save_data))
-        except Exception as e:
-            self.handleError(record)
+        self.format(record)
+        date = record.msg['date']
+        time = record.msg['time']
+        message = record.msg['message']
+        path = record.msg['path']
+        response_time = record.msg['response_time']
+        method = record.msg['method']
+        status_code = record.msg['status_code']
+        self.stream.write(f'{date},{time},{method},{path},{response_time},{message},{status_code}\n')
+        self.flush()

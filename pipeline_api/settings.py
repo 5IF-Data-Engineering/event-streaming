@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,6 @@ POSTGRES_DB_STAGING = os.environ.get('POSTGRES_DB_STAGING', 'deng_staging')
 
 REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
 REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
-REDIS_DB = os.environ.get('REDIS_DB', '0')
 
 SNOWFLAKE_USERNAME = os.environ.get('SNOWFLAKE_USERNAME', 'username')
 SNOWFLAKE_PASSWORD = os.environ.get('SNOWFLAKE_PASSWORD', 'password')
@@ -137,22 +137,32 @@ CACHES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'redis': {
-            'class': 'pipeline_api.handlers.RedisHandler',
-            'host': REDIS_HOST,  # Update with your Redis server details
-            'port': REDIS_PORT,  # Update with your Redis server port
-            'db': REDIS_DB,  # Update with your Redis database number
-            'key': 'logging_queue',  # Update with the desired Redis key
+    "formatters": {
+        "verbose": {
+            "format": "{name} {module} {levelname} {asctime} {msg}",
+            "style": "{",
         },
+        "simple": {
+            "format": "{level} {message}",
+            "style": "{",
+        },
+    },
+    'handlers': {
+        'request': {
+            'level': 'INFO',
+            'class': 'pipeline_api.handlers.RequestHandler',
+            # Save the log file by date
+            'filename': f'{BASE_DIR}/logs/{datetime.datetime.now().strftime("%Y%m%d")}.log',
+        }
     },
     'loggers': {
         'pipeline_api.log_middleware.api_log_middleware': {
-            'handlers': ['redis'],
-            'level': 'INFO',  # Set the desired log level
+            'handlers': ['request'],
+            'level': 'INFO',
             'propagate': True,
-        },
+        }
     },
+
 }
 
 # Password validation

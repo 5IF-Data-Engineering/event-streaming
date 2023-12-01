@@ -1,7 +1,6 @@
 import logging
 import datetime
 import time
-import json
 
 
 def log_request(obj, request, logger_req):
