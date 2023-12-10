@@ -28,9 +28,6 @@ POSTGRES_DB_STAGING = os.environ.get('POSTGRES_DB_STAGING', 'deng_staging')
 REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
 REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
 
-SNOWFLAKE_USERNAME = os.environ.get('SNOWFLAKE_USERNAME', 'username')
-SNOWFLAKE_PASSWORD = os.environ.get('SNOWFLAKE_PASSWORD', 'password')
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -66,8 +63,6 @@ INSTALLED_APPS = [
     'ingestion_bus_delay.apps.IngestionBusDelayConfig',
     'staging_weather.apps.StagingWeatherConfig',
     'staging_bus_delay.apps.StagingBusDelayConfig',
-    'enrichment_bus_weather.apps.EnrichmentBusWeatherConfig',
-    'production_star_schema.apps.ProductionStarSchemaConfig',
     'rest_framework_swagger',
     'drf_yasg',
     'django_redis',
